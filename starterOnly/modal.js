@@ -161,5 +161,3 @@ function validateForm(event)
         document.getElementById("confirmation").style.display = "block";
     }
 }
-
-test
