@@ -119,30 +119,45 @@ function validateForm(event)
 
 
     // Ville de tournois
-    let a = document.getElementById("location-1");
-    let b = document.getElementById("location-2");
-    let c = document.getElementById("location-3");
-    let d = document.getElementById("location-4");
-    let g = document.getElementById("location-5");
-    let f = document.getElementById("location-6");
-  
+    const locations = document.querySelectorAll("input[type=radio]");
     // Ville checked ou pas
-    if(a.checked == true || b.checked == true || c.checked == true || d.checked == true || g.checked == true || f.checked == true)
+    // solution 1
+    for( let i = 0; i < locations.length; i++ )
     {
-        message = "";
-        var cityValid = true;
-    }
-    else
-    {
-        message = "Veuillez selectionner une ville";
+        console.log(locations[i]);
+        if(locations[i].checked == true)
+        {
+            message = "";
+            var cityValid = true;
+            break;
+        }
+        else
+        {
+            message = "Veuillez selectionner une ville";
+        }
     }
     document.getElementById("err-location").innerHTML = message;
+    // solution2
+    // console.log(locations);
 
+    // let isChecked = Array.from(locations).find((location)=>{
+    //     return location.checked == true;
+    // });
+    // console.log(isChecked); 
+    // if( isChecked !== undefined)
+    // {
+    //     message = "";
+    // }
+    // else
+    // {
+    //     message = "Veuillez selectionner une ville";
+    // }
+    // document.getElementById("err-location").innerHTML = message;
 
     // Je récupere la checkbox CGU
-    let cgu = document.getElementById("cgu").value;
+    let cgu = document.getElementById("cgu");
     // Vérif CGU
-    if(!this.cgu.checked)
+    if(!cgu.checked)
     {
         message = "Vous devez vérifier que vous acceptez les termes et conditions.";
     }
@@ -156,7 +171,6 @@ function validateForm(event)
     // tout est ok on ferme le formulaire et on affiche le message de confirmation
     if (firstnameValid == true && lastnameValid == true && emailValid == true && quantityValid == true && cityValid == true && cguValid == true )
     {
-        alert("le form est validé");
         document.getElementById("form-valid").style.display = "none";
         document.getElementById("confirmation").style.display = "block";
     }
